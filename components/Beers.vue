@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-    <p v-if="pending">Fetching...</p>
-    <pre v-else-if="error">Could not load beers: {{ error.data }}</pre>
     <div class="beers-grid">
       <BeerCard v-for="beer in beers" :beer="beer" />
     </div>
@@ -10,9 +8,19 @@
 
 
 <script setup>
-  import BeersCard from "./BeerCard";
+  let beers = await $fetch('https://api.punkapi.com/v2/beers?brewed_after=11-2012');
 
-  const { data: beers, pending, error } = await useFetch(() => `https://api.punkapi.com/v2/beers?brewed_after=11-2012`)
+  beers = removeCentennial(beers);
+  beers = orderByAbv(beers);
+
+  function removeCentennial(items) {
+    return items.filter( _ => !_.ingredients?.hops?.some( __ => __.name.includes('Centennial')));
+  }
+
+  function orderByAbv(items) {
+    return items.sort( (a, b) => a.abv - b.abv);
+  }
+
   console.log(beers);
 </script>
 
