@@ -1,6 +1,5 @@
 <template>
   <article class="beer-card">
-    <BeerRibbon :name="beer.tagline.substring(0, 30)" />
     <div class="beer-card__header">
       <img :src="beer.image_url" :alt="beer.name"  />
       <hgroup>
@@ -8,6 +7,15 @@
         <small>{{ beer.description }}</small>
       </hgroup>
     </div>
+    <img v-if="beer.lactose"
+         class="beer-card__lactose"
+         :src="lactose"
+         alt="Contains Lactose"
+    />
+    <div v-if="beer.dryHopped" class="beer-card__hopped">
+      DRY<br>HOPPED
+    </div>
+    <BeerRibbon :name="beer.tagline.substring(0, 30)" />
     <div class="beer-card__more-details">
       <BeerDetails :beer="beer" />
     </div>
@@ -15,6 +23,7 @@
 </template>
 
 <script setup>
+import lactose from 'assets/images/lactose.png';
 const props = defineProps(['beer'])
 </script>
 
@@ -39,6 +48,10 @@ const props = defineProps(['beer'])
         margin-top: 0.75rem;
       }
 
+      img {
+        height: 280px;
+      }
+
       small {
         font-size: 0.675rem;
         overflow: hidden;
@@ -48,6 +61,27 @@ const props = defineProps(['beer'])
       }
     }
 
+    &__lactose {
+      height: 2rem;
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+    }
+
+    &__hopped {
+      position: absolute;
+      color: #007500;
+      top: 0.5rem;
+      left: 0.5rem;
+      font-size: 0.5rem;
+      padding: 0.5rem 0.25rem;
+      border: 1px solid;
+      text-align: center;
+      line-height: 10px;
+      border-radius: 50%;
+      font-weight: 900;
+
+    }
 
     &:hover {
       scale: 1.05;
@@ -66,9 +100,6 @@ const props = defineProps(['beer'])
 
     }
 
-    img {
-      height: 280px;
-    }
 
     &__more-details {
       position: absolute;
