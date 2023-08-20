@@ -1,6 +1,10 @@
-# Nuxt 3 Minimal Starter
+# 👋 Cheers & Beers
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project was created with [Nuxt](https://github.com/facebook/react) version 3
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d80a465c-2427-46a9-9186-b619c34abdb8/deploy-status)](https://app.netlify.com/sites/cheers-beers/deploys)
+
+[Live demo](https://cheers-beers.netlify.app)
 
 ## Setup
 
